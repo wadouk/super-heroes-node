@@ -24,13 +24,20 @@ export default class Hero extends Component {
     })
   }
 
+  static renderPowers(powers) {
+    return (<div> <ol>{powers.map(power => {
+      return (<li key={power.id}>{power.name}</li>)
+    })} </ol></div>)
+  }
+
   static renderHero(hero) {
     document.title = `Comic Vine : Hero : ${hero.name}`;
     return (<div>
       <div>{hero.real_name} also known as {hero.name}</div>
-      <div style={{fontSize : "2em"}} >{genderNum2String(hero.gender)}</div>
+      <div style={{fontSize: "2em"}}>{genderNum2String(hero.gender)}</div>
       <div>From : {hero.origin.name}</div>
       <div>{hero.image && <img src={hero.image.screen_url}/>}</div>
+      <div>{Hero.renderPowers(hero.powers)}</div>
     </div>)
   }
 
