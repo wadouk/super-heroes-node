@@ -37,7 +37,7 @@ export default class Heros extends Component {
   }
 
   render() {
-    document.title = `Comic Vine : Heros`;
+    document.title = `Comic Vine : Heroes`;
     return (<div>{this.state.characters ? this.renderCharacters() : <div>loading</div>}</div>)
   }
 }
