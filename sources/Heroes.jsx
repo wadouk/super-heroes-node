@@ -2,7 +2,7 @@ import {
   default as React,
   Component,
 } from 'react';
-import {heros} from './repo';
+import {heroes} from './repo';
 
 export default class Heros extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ export default class Heros extends Component {
   }
 
   refreshData() {
-    heros(this.state.page).then((results) => this.setState({characters: results}));
+    heroes(this.state.page).then((results) => this.setState({characters: results}));
   }
 
   componentWillMount() {

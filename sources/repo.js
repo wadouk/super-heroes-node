@@ -12,7 +12,7 @@ function shouldFailOnStatus(response) {
   }
 }
 
-function heros(page, offset = 10) {
+function heroes(page, offset = 10) {
   return xhr("/api/characters/", {
     params: {
       api_key: myConf.comicvine.key,
@@ -36,4 +36,4 @@ function hero(id) {
   }).then(shouldFailOnStatus)
 }
 
-export {hero, heros}
+export {hero, heroes}
