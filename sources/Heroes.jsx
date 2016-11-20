@@ -44,7 +44,7 @@ export default class Heros extends Component {
           {this.state.characters.map(character => {
             return (<div key={character.id}>
                 {character.image && <img src={character.image.tiny_url}/>}
-                {character.name}
+                <a href={`##/hero/${character.id}`}>{character.name} </a>
               </div>
             )
           })}
