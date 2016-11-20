@@ -5,7 +5,7 @@ import Heroes from './Heroes.jsx';
 
 export default (() => {
   return (<Router>
-    <Route>
+    <Route path={/^(\?page=(\d+))?$/}>
       <Heroes/>
     </Route>
   </Router>);

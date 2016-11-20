@@ -9,11 +9,23 @@ export default class Heros extends Component {
     super(props);
     this.state = {
       characters: undefined,
+      page: 0
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      page: nextProps.args && parseInt(nextProps.args[2], 10) || 0,
+      characters : undefined
+    }, this.refreshData.bind(this))
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return (this.state.page !== nextState.page) || !(this.state.page === nextState.page === 0);
+  }
+
   refreshData() {
-    heros().then((results) => this.setState({characters: results}));
+    heros(this.state.page).then((results) => this.setState({characters: results}));
   }
 
   componentWillMount() {
@@ -23,6 +35,11 @@ export default class Heros extends Component {
   renderCharacters() {
     return (
       <div>
+        <div>
+          {this.state.page == 0 ? null : <a href={`##/?page=${this.state.page - 1}`}>❰</a>}
+          Page {this.state.page}
+          <a href={`##/?page=${this.state.page + 1}` }>❱</a>
+        </div>
         <div>
           {this.state.characters.map(character => {
             return (<div key={character.id}>
