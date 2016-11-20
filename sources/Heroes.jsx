@@ -9,13 +9,11 @@ export default class Heros extends Component {
     super(props);
     this.state = {
       characters: undefined,
-      page: 0,
-      offset: 10,
     }
   }
 
   refreshData() {
-    heros(this.state.page).then((results) => this.setState({characters: results}));
+    heros().then((results) => this.setState({characters: results}));
   }
 
   componentWillMount() {

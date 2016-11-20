@@ -4,14 +4,14 @@ import myConf  from '../.env.json';
 
 import xhr from 'axios';
 
-function heros(page) {
+function heros() {
   return xhr("/api/characters/", {
     params: {
       api_key: myConf.comicvine.key,
       "Accept": "application/json",
       "format": "json",
       "limit": 10,
-      "offset": page * 10,
+      "offset": 0,
       "field_list": "id,name,real_name,gender,origin,image,deck,description,aliases,powers,teams"
     }
   }).then(response => {
