@@ -38,24 +38,36 @@ class Route extends Component {
 class Router extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentPath: ""
-    };
+    this.state = Router.computeState(window.location.hash);
+    history.replaceState(null, "", window.location.hash);
+    window.addEventListener("popstate", this.onPopState.bind(this))
   }
 
-  getCurrentPath(pathMatch) {
-    var extractPath = /##\/(.*)/;
+  onPopState() {
+    this.setState(Router.computeState(window.location.hash));
+  }
+
+  static afterSetState() {
+    history.pushState(null, "", window.location.hash);
+  }
+
+  static getCurrentPath(pathMatch) {
+    var extractPath = /##(.*)/;
     if (extractPath.test(pathMatch)) {
       return extractPath.exec(pathMatch)[1]
     }
     return "";
   }
 
+  static computeState(hash) {
+    return {
+      currentPath: Router.getCurrentPath(hash)
+    };
+  }
+
   onClick(e) {
     if (e.target.nodeName === "A") {
-      this.setState({
-        currentPath: this.getCurrentPath(e.target.hash)
-      });
+      this.setState(Router.computeState(e.target.hash), Router.afterSetState);
       e.preventDefault();
     }
   }
